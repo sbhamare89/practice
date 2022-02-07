@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: proxycm
+data:
+  default.conf: |
+    server {
+        listen 80;
+        access_log off;
+        location / {
+            proxy_pass http://routesvc;
+            proxy_http_version 1.1;
+        }
+      }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: appproxy
+  name: appproxy
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: appproxy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: appproxy
+  name: appproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appproxy
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: appproxy
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: proxycmvolume
+          mountPath: /etc/nginx/conf.d/
+      volumes:
+        - name: proxycmvolume
+          configMap:
+            name: proxycm
