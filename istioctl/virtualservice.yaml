@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: webvs
+spec:
+  hosts:
+  - "test.example.com"
+  gateways:
+  - app-gateway
+  http:
+  - route:
+    - destination:
+        host: appproxy
