@@ -1,4 +1,4 @@
-name: My first workflow
+name: Generate-cowsay
 on: push
 jobs:
     first_job:
