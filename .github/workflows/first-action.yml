@@ -6,3 +6,7 @@ jobs:
         steps:
         - name: welcome message
           run: echo "My firt githu action"
+        - name: list of files
+          run: ls
+        - name: read file
+          run: cat README.md
