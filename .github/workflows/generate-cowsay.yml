@@ -8,15 +8,5 @@ jobs:
           run: echo "My firt githu action"
         - name: Checkout
           uses: actions/checkout@main
-        - name: install cowsay programm
-          run: sudo apt-get install cowsay -y
-        - name: list of files
-          run: ls
-        - name: read file
-          run: cat README.md
-        - name: single command
-          run: |
-            ls -lrta
-            cat README.md
-            cowsay -f dragon "Run for cover, i am dragon" >> dragon.txt
-            cat dragon.txt
+        - name: Run script
+          run: sh -x script.sh
