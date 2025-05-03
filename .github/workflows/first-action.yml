@@ -6,6 +6,8 @@ jobs:
         steps:
         - name: welcome message
           run: echo "My firt githu action"
+        - name: Checkout
+          uses: actions/checkout@main
         - name: list of files
           run: ls
         - name: read file
