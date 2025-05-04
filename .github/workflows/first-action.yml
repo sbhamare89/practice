@@ -16,7 +16,7 @@ jobs:
           run: cat README.md
         - name: single command
           run: |
-            ls -lrta
+            ls -lta
             cat README.md
             cowsay -f dragon "Run for cover, i am dragon" >> dragon.txt
             cat dragon.txt
